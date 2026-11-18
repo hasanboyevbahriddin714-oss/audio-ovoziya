@@ -1,0 +1,36 @@
+<section class="hikoyalar">
+  <h2>📚 Hikoyalar kutubxonasi</h2>
+
+  <div class="kitoblar">
+
+    <div class="kitob">
+      <img src="images/maqsad-sari.png"
+           alt="Maqsad sari qo‘yilgan qadamlar">
+      <h3>Maqsad sari qo‘yilgan qadamlar</h3>
+    </div>
+
+    <div class="kitob">
+      <img src="images/xavfli-sayohat.png"
+           alt="Xavfli sayohat">
+      <h3>Xavfli sayohat</h3>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.kitoblar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.kitob img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.kitob h3 {
+  font-size: 16px;
+}
+</style>
