@@ -1,2 +1,254 @@
-<div class="kitob">
-<img src="...">
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ovoziya audiokitoblar va hikoyalar olami.">
+<title>Ovoziya — Audiokitoblar</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b1120;
+  color:#f5f7fb;
+}
+header{
+  text-align:center;
+  padding:30px 15px;
+  background:linear-gradient(135deg,#142b42,#0b1120);
+}
+.logo{font-size:36px;font-weight:bold;color:#43e59b}
+header p{color:#bac7d6}
+nav{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+  background:#101a2b;padding:15px;
+  position:sticky;top:0;z-index:10
+}
+nav a{
+  color:#43e59b;text-decoration:none;
+  border:1px solid #30445c;padding:9px 14px;border-radius:20px
+}
+.container{max-width:1100px;margin:auto;padding:20px}
+.hero{
+  padding:35px 20px;text-align:center;border-radius:20px;
+  background:linear-gradient(135deg,#1b3852,#111a2b);
+  margin-bottom:25px
+}
+.hero h1{font-size:28px}
+.hero p{color:#c4d0df}
+button{
+  border:0;border-radius:10px;padding:12px;
+  background:#43e59b;color:#07131c;font-weight:bold;
+  cursor:pointer
+}
+.search{
+  width:100%;padding:14px;margin:10px 0 20px;
+  background:#101a2b;color:white;border:1px solid #33475f;
+  border-radius:12px;font-size:16px
+}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+}
+.card{
+  background:#162236;border:1px solid #263b52;
+  border-radius:15px;overflow:hidden
+}
+.cover{
+  width:100%;aspect-ratio:2/3;object-fit:cover;
+  display:block;background:#25354a
+}
+.card-content{padding:14px}
+.card h3{font-size:17px;margin:5px 0 10px}
+.desc{color:#b5c3d4;font-size:13px;min-height:32px}
+.price{color:#43e59b;font-weight:bold;margin:12px 0}
+audio{width:100%;margin:10px 0}
+.buttons{display:flex;gap:8px;flex-wrap:wrap}
+.buttons button{flex:1}
+.secondary{background:#2a3d54;color:white}
+.section-title{margin:30px 0 15px}
+#library{
+  background:#101a2b;padding:18px;border-radius:15px
+}
+footer{text-align:center;color:#92a5bb;padding:30px}
+@media(max-width:800px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+@media(max-width:480px){
+  .container{padding:12px}
+  .card-content{padding:9px}
+  .card h3{font-size:14px}
+  .desc{font-size:12px}
+  .hero h1{font-size:23px}
+  .buttons button{font-size:12px;padding:9px 5px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🎧 Ovoziya</div>
+  <p>Audiokitoblar olamiga xush kelibsiz</p>
+</header>
+
+<nav>
+  <a href="#home">Bosh sahifa</a>
+  <a href="#books">Hikoyalar</a>
+  <a href="#library">Kutubxona</a>
+</nav>
+
+<main class="container">
+
+<section class="hero" id="home">
+  <h1>Sevimli hikoyalaringiz bir joyda</h1>
+  <p>Har bir hikoya — yangi olam, yangi taassurot.</p>
+  <a href="#books"><button>Hikoyalarni ko‘rish</button></a>
+</section>
+
+<h2 id="books" class="section-title">📚 Audiokitoblar</h2>
+
+<input
+  type="search"
+  id="search"
+  class="search"
+  placeholder="🔎 Hikoyani qidiring..."
+>
+
+<div class="grid" id="bookGrid"></div>
+
+<h2 id="library" class="section-title">📖 Mening kutubxonam</h2>
+
+<div id="library">
+  <p id="libraryText">Saqlangan hikoyalar shu yerda ko‘rinadi.</p>
+  <div class="grid" id="libraryGrid"></div>
+</div>
+
+</main>
+
+<footer>
+  <h3>🎧 Ovoziya</h3>
+  <p>Hikoyalarni tinglang. Tasavvuringizni kengaytiring.</p>
+</footer>
+
+<script>
+const books = [
+  {title:"Maqsad sari qo‘yilgan qadamlar",desc:"Maqsad, orzu va intilish haqida.",audio:"story1.mp3"},
+  {title:"Muallif haqida qisqacha maʼlumot",desc:"Muallif va ijod olami.",audio:"story2.mp3"},
+  {title:"Xavfli sayohat",desc:"Sirli va kutilmagan sarguzasht.",audio:"story3.mp3"},
+  {title:"Xush kelibsan, kuz",desc:"Kuz, xotiralar va yangi hislar.",audio:"story4.mp3"},
+  {title:"Poyezddagi so‘nggi bekat",desc:"Poyezd yo‘lida yuz bergan voqealar.",audio:"story5.mp3"},
+  {title:"Qalbimdagi xavf-xatarlar",desc:"Hayot va qalb sinovlari.",audio:"story6.mp3"},
+  {title:"Muzlatilgan orzular",desc:"Orzular va sirli voqealar.",audio:"story7.mp3"},
+  {title:"Taqdir sinovlari",desc:"Taqdir yo‘lidagi sinovlar.",audio:"story8.mp3"},
+  {title:"Unutilmas tushim",desc:"Unutilmas va g‘aroyib tush.",audio:"story9.mp3"},
+  {title:"Hikoya 10",desc:"Yangi hikoya.",audio:"story10.mp3"},
+  {title:"Hikoya 11",desc:"Yangi hikoya.",audio:"story11.mp3"},
+  {title:"Hikoya 12",desc:"Yangi hikoya.",audio:"story12.mp3"},
+  {title:"Hikoya 13",desc:"Yangi hikoya.",audio:"story13.mp3"},
+  {title:"Hikoya 14",desc:"Yangi hikoya.",audio:"story14.mp3"},
+  {title:"Hikoya 15",desc:"Yangi hikoya.",audio:"story15.mp3"},
+  {title:"Hikoya 16",desc:"Yangi hikoya.",audio:"story16.mp3"},
+  {title:"Hikoya 17",desc:"Yangi hikoya.",audio:"story17.mp3"}
+];
+
+const bookGrid=document.getElementById("bookGrid");
+const libraryGrid=document.getElementById("libraryGrid");
+const search=document.getElementById("search");
+
+function getLibrary(){
+  try{
+    return JSON.parse(localStorage.getItem("ovoziyaLibrary")||"[]");
+  }catch(e){
+    return [];
+  }
+}
+
+function saveLibrary(data){
+  localStorage.setItem("ovoziyaLibrary",JSON.stringify(data));
+}
+
+function coverPath(number){
+  return "covers/cover"+number+".jpg";
+}
+
+function createCard(book){
+  const index=books.indexOf(book)+1;
+  const saved=getLibrary().includes(book.title);
+  const card=document.createElement("article");
+  card.className="card";
+
+  card.innerHTML=`
+    <img class="cover"
+      src="${coverPath(index)}"
+      alt="${book.title}"
+      onerror="this.onerror=null;this.src='covers/default.jpg'">
+
+    <div class="card-content">
+      <h3>${book.title}</h3>
+      <p class="desc">${book.desc}</p>
+      <div class="price">5 000 so‘m</div>
+
+      <audio controls preload="none">
+        <source src="audio/${book.audio}" type="audio/mpeg">
+        Audio mavjud bo‘lsa tinglash mumkin.
+      </audio>
+
+      <div class="buttons">
+        <button class="secondary save">${saved?"Saqlangan ✓":"Kutubxonaga"}</button>
+        <button class="buy">Sotib olish</button>
+      </div>
+    </div>
+  `;
+
+  card.querySelector(".save").onclick=()=>{
+    let list=getLibrary();
+    if(list.includes(book.title)){
+      list=list.filter(x=>x!==book.title);
+    }else{
+      list.push(book.title);
+    }
+    saveLibrary(list);
+    renderBooks(books);
+    renderLibrary();
+  };
+
+  card.querySelector(".buy").onclick=()=>{
+    alert("Audiokitobni sotib olish xizmati tez orada ulanadi.");
+  };
+
+  return card;
+}
+
+function renderBooks(list){
+  bookGrid.innerHTML="";
+  list.forEach(book=>bookGrid.appendChild(createCard(book)));
+}
+
+function renderLibrary(){
+  const saved=getLibrary();
+  libraryGrid.innerHTML="";
+
+  document.getElementById("libraryText").textContent=
+    saved.length
+    ? "Kutubxonangizda "+saved.length+" ta hikoya mavjud."
+    : "Hali hikoya saqlanmagan.";
+
+  saved.forEach(title=>{
+    const book=books.find(b=>b.title===title);
+    if(book) libraryGrid.appendChild(createCard(book));
+  });
+}
+
+search.addEventListener("input",()=>{
+  const q=search.value.toLowerCase();
+  renderBooks(books.filter(book=>book.title.toLowerCase().includes(q)));
+});
+
+renderBooks(books);
+renderLibrary();
+</script>
+
+</body>
+</html>
